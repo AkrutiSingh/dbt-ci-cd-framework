@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Core fact table joining orders, customers, payments and items."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: order_status
+        tests:
+          - not_null
+
+  - name: monthly_revenue
+    description: "Monthly aggregated revenue and delivery metrics."
+    columns:
+      - name: order_month
+        tests:
+          - unique
+          - not_null
+      - name: total_revenue
+        tests:
+          - not_null
+
+  - name: top_products
+    description: "Top 20 product categories by revenue."
+    columns:
+      - name: category
+        tests:
+          - unique
+          - not_null
+      - name: total_revenue
+        tests:
+          - not_null
