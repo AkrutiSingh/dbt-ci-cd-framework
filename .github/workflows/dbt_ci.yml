@@ -11,6 +11,11 @@ jobs:
     name: Run dbt Models and Tests
     runs-on: ubuntu-latest
 
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -21,27 +26,27 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: |
-          pip install dbt-snowflake
+        run: pip install dbt-snowflake
 
       - name: Create profiles.yml
         run: |
           mkdir -p ~/.dbt
-          cat << EOF > ~/.dbt/profiles.yml
-          dbt_pipeline:
+          echo "dbt_pipeline:
             target: dev
             outputs:
               dev:
                 type: snowflake
-                account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-                user: ${{ secrets.SNOWFLAKE_USER }}
-                password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+                account: ${SNOWFLAKE_ACCOUNT}
+                user: ${SNOWFLAKE_USER}
+                password: ${SNOWFLAKE_PASSWORD}
                 role: ACCOUNTADMIN
                 warehouse: ECOMMERCE_WH
                 database: ECOMMERCE_DB
                 schema: STAGING
-                threads: 4
-          EOF
+                threads: 4" > ~/.dbt/profiles.yml
+
+      - name: Verify profiles.yml created
+        run: cat ~/.dbt/profiles.yml
 
       - name: Run dbt models
         run: |
