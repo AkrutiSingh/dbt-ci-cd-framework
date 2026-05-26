@@ -104,17 +104,13 @@ Developer pushes code to GitHub
 | GitHub Actions | CI/CD automation |
 | Python | Runtime environment |
 
-<br>
-
 ## 📁 Project Structure
 
 ```
 dbt-ci-cd-framework/
-│
 ├── .github/
 │   └── workflows/
 │       └── dbt_ci.yml
-│
 ├── dbt_pipeline/
 │   ├── dbt_project.yml
 │   └── models/
@@ -130,7 +126,6 @@ dbt-ci-cd-framework/
 │           ├── fct_orders.sql
 │           ├── monthly_revenue.sql
 │           └── top_products.sql
-│
 ├── .env.example
 ├── requirements.txt
 └── README.md
