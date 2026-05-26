@@ -80,22 +80,20 @@ Developer pushes code to GitHub
             |
             | GitHub Actions triggers automatically
             v
-    ┌─────────────────────┐
-    │   Ubuntu Runner      │
-    │                     │
-    │  1. Install dbt     │
-    │  2. Setup Snowflake │
-    │     credentials     │
-    │  3. dbt run         │
-    │  4. dbt test        │
-    │  5. dbt docs        │
-    └─────────────────────┘
+    +---------------------+
+    |   Ubuntu Runner     |
+    |                     |
+    |  1. Install dbt     |
+    |  2. Setup Snowflake |
+    |     credentials     |
+    |  3. dbt run         |
+    |  4. dbt test        |
+    |  5. dbt docs        |
+    +---------------------+
             |
-      Pass? → ✅ Deploy
-      Fail? → ❌ Block
+      Pass? -> Deploy  YES
+      Fail? -> Block   NO
 ```
-
----
 
 ## 🛠️ Tech Stack
 
@@ -106,7 +104,7 @@ Developer pushes code to GitHub
 | GitHub Actions | CI/CD automation |
 | Python | Runtime environment |
 
----
+<br>
 
 ## 📁 Project Structure
 
@@ -115,30 +113,29 @@ dbt-ci-cd-framework/
 │
 ├── .github/
 │   └── workflows/
-│       └── dbt_ci.yml        # CI/CD pipeline definition
+│       └── dbt_ci.yml
 │
 ├── dbt_pipeline/
-│   ├── dbt_project.yml       # dbt configuration
+│   ├── dbt_project.yml
 │   └── models/
-│       ├── staging/          # 5 cleaning models
+│       ├── staging/
 │       │   ├── sources.yml
 │       │   ├── stg_orders.sql
 │       │   ├── stg_customers.sql
 │       │   ├── stg_order_items.sql
 │       │   ├── stg_products.sql
 │       │   └── stg_order_payments.sql
-│       └── marts/            # 3 business models
+│       └── marts/
 │           ├── schema.yml
 │           ├── fct_orders.sql
 │           ├── monthly_revenue.sql
 │           └── top_products.sql
 │
-├── .env.example              # Credential template
-├── requirements.txt          # Python dependencies
+├── .env.example
+├── requirements.txt
 └── README.md
 ```
 
----
 
 ## ⚙️ GitHub Actions Workflow
 
